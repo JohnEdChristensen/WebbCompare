@@ -1,1 +1,42 @@
-<h1>Hello World!</h1>
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
+	<link rel="stylesheet" href="css/style.css"> <!-- Resource style -->
+	<script src="js/modernizr.js"></script> <!-- Modernizr -->
+  	
+    <title>Webb Compare</title>
+    </head>
+    
+    <body>
+        <div class="main">
+            <div style="float: right;padding:1em;">
+                <a href="https://github.com/JohnEdChristensen/WebbCompare/tree/gh-pages">
+                    <i class="fa fa-github"></i></a>
+            </div>
+            <figure class="cd-image-container">
+                <img src="img/Webb Deep Field Cropped.png" alt="Webb Image">
+                <span class="cd-image-label" data-type="original">Webb</span>
+    
+                <div class="cd-resize-img">
+                    <!-- the resizable image on top -->
+                    <img src="img/Hubble Cropped.png" alt="Hubble Image">
+                    <span class="cd-image-label" data-type="modified">Hubble</span>
+                </div>
+    
+                <span class="cd-handle"></span>
+            </figure> <!-- cd-image-container -->
+    
+        </div>
+        <script src="js/jquery-2.1.1.js"></script>
+        <script src="js/jquery.mobile.custom.min.js"></script> <!-- Resource jQuery -->
+        <script src="js/main.js"></script> <!-- Resource jQuery -->
+    </body>
+    
+    </html>
