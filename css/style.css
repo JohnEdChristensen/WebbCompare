@@ -56,6 +56,10 @@ header h1 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.main {
+paddin
+
+}
 @media only screen and (min-width: 768px) {
   header {
     height: 240px;
