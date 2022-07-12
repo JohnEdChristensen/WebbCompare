@@ -25,6 +25,18 @@ img {
   max-width: 100%;
 }
 
+h1 {
+  font-size: 22px;
+  font-size: 1.375rem;
+  color: #EBCB8B;
+  font-weight: 300;
+  text-align: center;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+h1 a{
+  text-decoration: underline;
+}
 /* -------------------------------- 
 
 Main components 
@@ -59,7 +71,7 @@ header h1 {
   position: relative;
   width: 90%;
   max-width: 768px;
-  margin: 0em auto;
+  margin: 1em auto;
 }
 .cd-image-container img {
   display: block;
