@@ -33,6 +33,12 @@ h1 {
   text-align: center;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  padding-top: 1rem;
+  border: 1px solid #EBCB8B;
+  border-bottom: 0px solid black;
+  width: 90%;
+  max-width: 768px;
+  margin: auto;
 }
 h1 a{
   text-decoration: underline;
