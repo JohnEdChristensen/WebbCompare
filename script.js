@@ -1,32 +1,85 @@
-// This illustrates a way to change the right-hand image for this image slider:
-// https://codepen.io/imoskvin/pen/yOXqvO?editors=0010
+// Proof of concept by Illya Moskvin Modified by John Christensen
+// v1 - 2022 - 
+
+// MIT License, free (gratis and libre) for any use, we take no responsibility, etc.
+// This example was updated in 2021 to not require jQuery.
+
+// You can see this slider in use on the AIC website:
+// https://www.artic.edu/articles/921/caring-for-two-woodcuts-by-martin-puryear
+
+// Originally inspired by the following:
+//https://codepen.io/imoskvin/pen/yOXqvO
+// https://codyhouse.co/gem/css-jquery-image-comparison-slider/
+
 function createView(sources) {
-    var viewer = OpenSeadragon({
-        id: "container",
-        xmlns: "http://schemas.microsoft.com/deepzoom/2008",
-        prefixUrl: "openseadragon/images/"
-        /** 
-            tileSources: [
-                "img/webb/carina.jpg",
-                "img/webb/deep_field.png",
-                "img/webb/southern_nebula.jpg",
-                "img/webb/carina.jpg",
-                "img/webb/carina.jph",
-                "img/webb/carina.jph",
-            ],
-            sequenceMode: true,    
-            showReferenceStrip: true,
-            referenceStripScroll: 'vertical',
-            */
-    });
 
-    var $viewer = $('#container');
+    const viewerElement = document.getElementById('container');
+    const handleElement = viewerElement.querySelector('.m-image-slider__handle');
 
 
-    // This returns replaceImage defined inside the function scope
-    var loader = loadComparisonImages($viewer, viewer, sources);
+    let viewer;
+    let middle;
 
-    // Loading Indicator
+    let leftImage = null;
+    let rightImage = null;
+
+    let leftRect = new OpenSeadragon.Rect(0, 0, 0, 0);
+    let rightRect = new OpenSeadragon.Rect(0, 0, 0, 0);
+
+    let oldSpringX = 0.5;
+
+    initViewer();
+
+    function initViewer() {
+        viewer = OpenSeadragon({
+            element: viewerElement,
+            xmlns: 'http://schemas.microsoft.com/deepzoom/2008',
+            prefixUrl: "openseadragon/images/",
+            zoomPerClick: 1.3, // 1, // 2.0
+            showZoomControl: true,
+            showFullPageControl: true,
+            showRotationControl: false,
+            showSequenceControl: false,
+        });
+
+        middle = new OpenSeadragon.Point(viewerElement.clientWidth / 2, viewerElement.clientHeight / 2);
+
+        viewer.addHandler('animation-start', imagesClip);
+        viewer.addHandler('animation', imagesClipAggressive);
+
+        viewer.open([
+            {
+                //Put the Webb image as a base layer, for hubble images that are transparent
+                tileSource: sources[1],
+                success: function (event) {
+
+                    imagesLoaded();
+
+                }
+            },
+            {
+                tileSource: sources[0],
+                success: function (event) {
+
+                    leftImage = event.item;
+                    imagesLoaded();
+
+                }
+            },
+            {
+                tileSource: sources[1],
+                success: function (event) {
+
+                    rightImage = event.item;
+                    imagesLoaded();
+
+                }
+            },
+        ]);
+    }
+  
+
+  // Loading Indicator
     function areAllFullyLoaded() {
         var tiledImage;
         var count = viewer.world.getItemCount();
@@ -61,215 +114,163 @@ function createView(sources) {
         });
     });
 
-    // https://codepen.io/imoskvin/pen/yOXqvO?editors=0010
-    function loadComparisonImages($viewer, viewer, sources) {
+    function updateMiddle(offset) {
+        middle.x = offset;
+    }
 
-        var $handle = $('<span/>').addClass('slider-handle');
-
-        $viewer.append($handle);
-        $viewer.addClass('slider-container');
-
-        var middle = new OpenSeadragon.Point($viewer.width() / 2, $viewer.height() / 2);
-
-        function updateMiddle(offset) {
-            middle.x = offset;
-        }
-
-        // Keep track of the two images we're splitting
-        var leftImage = null;
-        var rightImage = null;
-
-        var leftRect = new OpenSeadragon.Rect(0, 0, 0, 0);
-        var rightRect = new OpenSeadragon.Rect(0, 0, 0, 0);
-
-        viewer.open([
-            {
-                //Put the Webb image as a base layer, for hubble images that are transparent
-                tileSource: sources[1],
-                success: function (event) {
-
-                    imagesLoaded();
-
-                }
-            },
-            {
-                tileSource: sources[0],
-                success: function (event) {
-
-                    leftImage = event.item;
-                    imagesLoaded();
-
-                }
-            },
-            {
-                tileSource: sources[1],
-                success: function (event) {
-
-                    rightImage = event.item;
-                    imagesLoaded();
-
-                }
-            },
-        ]);
-
-        // Handle pan and zoom events
-        viewer.addHandler('animation', function (viewer) {
-
+    function imagesLoaded() {
+        if (leftImage && rightImage) {
+            leftRect.height = leftImage.getContentSize().y;
+            rightRect.height = rightImage.getContentSize().y;
             imagesClip();
+            initClip();
+        }
+    }
 
-        })
+    function imagesClip() {
+        let rox = rightImage.viewerElementToImageCoordinates(middle).x;
+        let lox = leftImage.viewerElementToImageCoordinates(middle).x;
 
-        // Callback function to modify what image is loaded
-        var replaceImage = function (source) {
+        rightRect.x = rox;
+        rightRect.width = rightImage.getContentSize().x - rox;
 
-            viewer.addTiledImage({
-                tileSource: source,
-                success: function (event) {
+        leftRect.width = lox;
 
-                    if (rightImage) {
-                        viewer.world.getIndexOfItem(rightImage);
-                        viewer.world.removeItem(rightImage);
-                    }
+        leftImage.setClip(leftRect);
+        rightImage.setClip(rightRect);
+    }
 
-                    rightImage = event.item;
-                    imagesClip();
-                }
-            });
-        };
+    function imagesClipAggressive() {
+        if (!rightImage || !leftImage) {
+            window.setTimeout(imagesClipAggressive, 200);
+            return;
+        }
 
-        // Return the callback function
-        return replaceImage;
+        let newSpringX = viewer.viewport.centerSpringX.current.value;
+        let deltaSpringX = newSpringX - oldSpringX;
+        oldSpringX = newSpringX;
 
-        // Basic function to check when both images are loaded
-        function imagesLoaded() {
-            if (leftImage && rightImage) {
+        let fixedMiddle = viewer.viewport.viewerElementToViewportCoordinates(middle);
+        fixedMiddle.x += deltaSpringX;
 
-                leftRect.height = leftImage.getContentSize().y;
-                rightRect.height = rightImage.getContentSize().y;
+        let rox = rightImage.viewportToImageCoordinates(fixedMiddle).x;
+        let lox = leftImage.viewportToImageCoordinates(fixedMiddle).x;
 
+        imagesClipShared(rox, lox);
+    }
+
+    function imagesClip() {
+        if (!rightImage || !leftImage) {
+            window.setTimeout(imagesClip, 200);
+            return;
+        }
+
+        let rox = rightImage.viewerElementToImageCoordinates(middle).x;
+        let lox = leftImage.viewerElementToImageCoordinates(middle).x;
+
+        imagesClipShared(rox, lox);
+    }
+
+    function imagesClipShared(rox, lox) {
+        rightRect.x = rox;
+        rightRect.width = rightImage.getContentSize().x - rox;
+
+        leftRect.width = lox;
+
+        leftImage.setClip(leftRect);
+        rightImage.setClip(rightRect);
+    }
+
+    function initClip() {
+        // We will assume that the width of the handle element does not change
+        let dragWidth = handleElement.offsetWidth;
+
+        // However, we will track when the container resizes
+        let containerWidth, containerOffset, minLeft, maxLeft;
+
+        function updateContainerDimensions() {
+            containerWidth = viewerElement.offsetWidth;
+            containerOffset = viewerElement.getBoundingClientRect().left + window.scrollX;
+            minLeft = containerOffset + 10;
+            maxLeft = containerOffset + containerWidth - dragWidth - 10;
+
+            // Spoof the mouse events
+            let offset = handleElement.getBoundingClientRect().left + window.scrollX + dragWidth / 2;
+            let event;
+
+            // Bind the drag event
+            event = new Event('mousedown');
+            event.pageX = offset;
+
+            handleElement.dispatchEvent(event);
+
+            // Execute the drag event
+            event = new Event('mousemove');
+            event.pageX = offset;
+
+            viewerElement.dispatchEvent(event);
+
+            // Unbind the drag event
+            handleElement.dispatchEvent(new Event('mouseup'));
+        }
+
+        // Retrieve initial container dimention
+        updateContainerDimensions();
+
+        // Bind the container resize
+        window.addEventListener('resize', updateContainerDimensions);
+
+        function handleTouchStart(event) {
+            handleStartShared(event.targetTouches[0].pageX);
+        }
+
+        function handleMouseDown(event) {
+            handleStartShared(event.pageX);
+        }
+
+        function handleStartShared(pageX) {
+            let xPosition = handleElement.getBoundingClientRect().left + window.scrollX + dragWidth - pageX;
+
+            function trackDragMouse(event) {
+                trackDragShared(event.pageX);
+            }
+
+            function trackDragTouch(event) {
+                trackDragShared(event.changedTouches[0].pageX);
+            }
+
+            function trackDragShared(pageX) {
+                let leftValue = pageX + xPosition - dragWidth;
+
+                // Constrain the draggable element to move inside its container
+                leftValue = Math.max(leftValue, minLeft);
+                leftValue = Math.min(leftValue, maxLeft);
+
+                let widthPixel = (leftValue + dragWidth / 2 - containerOffset);
+                let widthFraction = widthPixel / containerWidth;
+                let widthPercent = widthFraction * 100 + '%';
+
+                handleElement.style.left = widthPercent;
+
+                updateMiddle(widthPixel);
                 imagesClip();
-
-                initClip();
-
-            }
-        }
-
-        function imagesClip() {
-
-            var rox = rightImage.viewerElementToImageCoordinates(middle).x;
-            var lox = leftImage.viewerElementToImageCoordinates(middle).x;
-
-            rightRect.x = rox;
-            rightRect.width = rightImage.getContentSize().x - rox;
-
-            leftRect.width = lox;
-
-            leftImage.setClip(leftRect);
-            rightImage.setClip(rightRect);
-
-        }
-
-        function initClip() {
-
-            // TODO: Abstract this away
-            var $handle = $viewer.find('.slider-handle');
-            var $container = $handle.parents('.slider-container');
-
-            // We will assume that the width of the handle element does not change
-            var dragWidth = $handle.outerWidth();
-
-            // However, we will track when the container resizes
-            var containerWidth, containerOffest, minLeft, maxLeft;
-
-            function updateContainerDimensions() {
-
-                containerWidth = $container.outerWidth();
-                containerOffset = $container.offset().left;
-                minLeft = containerOffset + 10;
-                maxLeft = containerOffset + containerWidth - dragWidth - 10;
-
             }
 
-            // Retrieve initial container dimention
-            updateContainerDimensions();
+            viewerElement.addEventListener('mousemove', trackDragMouse);
+            viewerElement.addEventListener('touchmove', trackDragTouch);
 
-            // Bind the container resize
-            $(window).resize(function () {
-                updateContainerDimensions();
+            function unbindTrackDrag(event) {
+                viewerElement.removeEventListener('mousemove', trackDragMouse);
+                viewerElement.removeEventListener('touchmove', trackDragTouch);
+            }
 
-                // Spoof the mouse events
-                var offset = $handle.offset().left + dragWidth / 2;
-                var event;
+            document.addEventListener('mouseup', unbindTrackDrag, { once: true });
+            document.addEventListener('touchend', unbindTrackDrag, { once: true });
 
-                // Bind the drag event
-                event = new jQuery.Event("mousedown");
-                event.pageX = offset;
-
-                $handle.trigger(event);
-                // Bind the touchdrag event
-                event = new jQuery.Event("touchstart");
-                event.pageX = offset;
-
-                $handle.trigger(event);
-
-
-                // Execute the drag event
-                event = new jQuery.Event("mousemove");
-                event.pageX = offset;
-
-                $container.trigger(event);
-
-                // Unbind the drag event
-                $handle.trigger("mouseup");
-
-                // Execute the drag event
-                event = new jQuery.Event("touchmove");
-                event.pageX = offset;
-
-                $container.trigger(event);
-
-                // Unbind the drag event
-                $handle.trigger("touchend");
-
-            });
-
-            // We are just going to assume jQuery is loaded by now
-            // Eventually, I'll make this work without jQuery
-            $handle.on("mousedown vmousedown ontouchstart", function (e) {
-
-                var xPosition = $handle.offset().left + dragWidth - e.pageX;
-
-                updateContainerDimensions();
-
-                function trackDrag(e) {
-
-                    var leftValue = e.pageX + xPosition - dragWidth;
-
-                    //constrain the draggable element to move inside its container
-                    leftValue = Math.max(leftValue, minLeft);
-                    leftValue = Math.min(leftValue, maxLeft);
-
-                    var widthPixel = (leftValue + dragWidth / 2 - containerOffset);
-                    var widthFraction = widthPixel / containerWidth;
-                    var widthPercent = widthFraction * 100 + '%';
-
-                    $handle.css('left', widthPercent);
-
-                    updateMiddle(widthPixel);
-                    imagesClip();
-
-                }
-
-                $('html').on("mousemove vmousemove ontouchmove", trackDrag);
-
-                $('html').one("mouseup vmouseup ontouchend", function (e) {
-                    $('html').unbind("mousemove vmousemove ontouchmove", trackDrag);
-                });
-
-                e.preventDefault();
-
-            });
-
+            event.preventDefault();
         }
+
+        handleElement.addEventListener('mousedown', handleMouseDown);
+        handleElement.addEventListener('touchstart', handleTouchStart);
     }
 }

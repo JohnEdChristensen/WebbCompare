@@ -2,7 +2,8 @@
 How much better is the James Webb Space Telescope compared to Hubble?
 
 [Find out!](https://johnedchristensen.github.io/WebbCompare)
-![](img/Southern_Ring_Nebula_Webb_Compare.gif)
+![](img/Example.png)
 ### Resources
-- Build using OpenSeadragon https://openseadragon.github.io/
+- Built using OpenSeadragon https://openseadragon.github.io/
+- Special thanks to Illya Moskvin for the OpenSeadragon slider implementation https://codepen.io/imoskvin/pen/yOXqvO
 - Images from NASA https://www.nasa.gov/webbfirstimages

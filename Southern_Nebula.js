@@ -8,4 +8,5 @@ var sources = [
         url: 'img/webb/southern_nebula.png'
     }
 ];
+
 createView(sources);

@@ -113,3 +113,62 @@ div.desc {
 .floating_button:hover {
   background-color: #444;
 }
+
+.m-image-slider__viewer {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.m-image-slider__handle {
+  position: absolute;
+
+  /* center the element */
+  left: 50%;
+  top: 50%;
+}
+
+/* overflow is hidden by .m-image-slider__viewer */
+.m-image-slider__handle__divider {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background-color: white;
+  width: 3px;
+  height: 150vh;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+.m-image-slider__handle__circle {
+  position: absolute;
+
+  height: 45px;
+  width: 45px;
+
+  /* center the element */
+  left: 50%;
+  top: 50%;
+
+  margin-left: -23px;
+  margin-top: -23px;
+
+  border-radius: 50%;
+
+  background: gray !important;
+  cursor: move;
+
+  box-shadow: 0 0 0 6px rgba(0, 0, 0, 0.2), 0 0 10px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  z-index: 3;
+}
+
+.m-image-slider__handle svg {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
