@@ -1,0 +1,98 @@
+html, body {
+	height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #000000;
+  font-family: "Open Sans", sans-serif;
+  color:#ccc
+}
+h1 a{
+  text-decoration: underline;
+  font-size: 22px;
+  font-size: 1.375rem;
+  color: #EBCB8B;
+  font-weight: 300;
+  text-align: center;
+margin: 5px;
+}
+.scope_banner{
+margin: 5px;
+}
+* {
+  outline: 0;
+}
+#container {
+	position: relative;
+	height: 100%;
+}
+
+.slider-handle {
+
+	position: absolute;
+
+	height: 44px;
+	width: 44px;
+
+	/* center the element */
+	left: 50%;
+	top: 50%;
+
+	margin-left: -22px;
+	margin-top: -22px;
+
+	border-radius: 50%;
+
+	background: #ccc url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path fill="#FFF" d="M13 21l-5-5 5-5m6 0l5 5-5 5"/></svg>') no-repeat center center;
+	cursor: move;
+
+	box-shadow: 0 0 0 6px rgba(0, 0, 0, 0.2), 0 0 10px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+	z-index: 2;
+
+}
+
+.slider-handle.draggable {
+	background-color: #445b7c;
+}
+
+
+div.gallery {
+  margin: 5px;
+  margin-top: 30px;
+  border: 2px solid rgb(142, 142, 142);
+  float: left;
+  width: 180px;
+  border-radius: 5px;
+  background-color:#111;
+}
+
+div.gallery:hover {
+  border: 2px solid #fff;
+}
+
+div.gallery img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+div.desc {
+  padding: 15px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.floating_button {
+    position: fixed;
+    bottom: 1px;
+    right: 1px;
+    width: 50px;
+    height: 50px;
+    z-index: 1;
+	color:white;
+	border: none;
+	background-color: transparent;
+	margin:1em;
+}/* Darker background on mouse-over */
+.floating_button:hover {
+  background-color: #444;
+}
