@@ -1,0 +1,10 @@
+{
+    "configurations": [
+        {
+            "type": "pwa-chrome",
+            "name": "http://127.0.0.1:5501/Carina.html",
+            "request": "launch",
+            "url": "http://127.0.0.1:5501/Carina.html"
+        }
+    ]
+}

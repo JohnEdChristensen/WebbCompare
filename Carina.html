@@ -3,53 +3,43 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Webb Compare | Carina</title>
+  <title>Carina Nebula</title>
   <link rel="stylesheet" href="./style.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+  <script>
+    $(function () {
+      $("#banner").load("banner.html");
+    });
+  </script>
+  <script>
+    $(function () {
+      $("#galleryContainer").load("gallery.html");
+    });
+  </script>
 </head>
+
 <body>
-            <h1> <a href="https://en.wikipedia.org/wiki/Carina_Nebula">Carina Nebula</a></h1>
-<div class="scope_banner">
-<div style="float: left">Hubble</div>
-<div style="float: right">Webb</div>
-</div>
-  <button onclick="location.href='#gallery_start'" class="floating_button" ><i class="fa fa-image"></i> More Images</button>
-  <!-- partial:index.partial.html -->
+  <!-- Header -->
+  <img class="logo" src="img/WebbCompareLogo.png">
+  <h1> <a href="https://en.wikipedia.org/wiki/Carina_Nebula">Carina Nebula</a></h1>
+  <div id="banner"></div>
+
+  <!-- Canvas-->
+  <button onclick="location.href='#gallery_start'" class="floating_button"><i class="fa fa-image"></i> More
+    Images</button>
   <div id="container" class="slider-container">
     <div id="seadragon-viewer"></div>
 
-    <!-- partial -->
     <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
     <script src='https://openseadragon.github.io/openseadragon/openseadragon.js'></script>
     <script src="./script.js"></script>
     <script src="./Carina.js"></script>
   </div>
 
-  <div class="gallery" id="gallery_start">
-    <div class="desc">Southern Nebula</div>
-    <a target="_blank" href="Southern_Nebula.html">
-      <img src="img/webb/southern_nebula_350.jpg" alt="Southern Ring Nebula" width="600" height="400">
-    </a>
-  </div>
-  <div class="gallery_parent">
-    <div class="gallery">
-      <div class="desc">Carina Nebula</div>
-      <a target="_blank" href="Carina.html">
-        <img src="img/webb/carina_350.jpg" alt="Carina Nebula" width="600" height="400">
-      </a>
-    </div>
-    <div class="gallery">
-      <div class="desc">Deep Field</div>
-      <a target="_blank" href="Deep_Field.html">
-        <img src="img/webb/deep_field_350.jpg" alt="Deep Field" width="600" height="400">
-      </a>
-    </div>
-    <div class="gallery">
-      <div class="desc">Stephan's Quintet</div>
-      <a target="_blank" href="Stephans_Quintet.html">
-        <img src="img/webb/stephans_quintet_350.jpg" alt="Stephans Quintet" width="600" height="400">
-      </a>
-    </div>
+  <!--Gallery-->
+  <div id="galleryContainer"></div>
+
 
 </body>
 

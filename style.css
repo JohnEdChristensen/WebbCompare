@@ -6,13 +6,22 @@ html, body {
   font-family: "Open Sans", sans-serif;
   color:#ccc
 }
+.logo{
+ display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100px;
+  margin-top: 1em;
+}
+h1 {
+  text-align: center;
+}
 h1 a{
   text-decoration: underline;
   font-size: 22px;
   font-size: 1.375rem;
   color: #EBCB8B;
   font-weight: 300;
-  text-align: center;
   margin: 5px;
 }
 .scope_banner{
