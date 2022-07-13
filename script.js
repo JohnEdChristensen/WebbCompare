@@ -1,250 +1,257 @@
 // This illustrates a way to change the right-hand image for this image slider:
 // https://codepen.io/imoskvin/pen/yOXqvO?editors=0010
-function createView(sources){
-var viewer = OpenSeadragon({
-    id:              "container",
-    xmlns:           "http://schemas.microsoft.com/deepzoom/2008",
-    prefixUrl:       "openseadragon/images/"
-/** 
-    tileSources: [
-        "img/webb/carina.jpg",
-        "img/webb/deep_field.png",
-        "img/webb/southern_nebula.jpg",
-        "img/webb/carina.jpg",
-        "img/webb/carina.jph",
-        "img/webb/carina.jph",
-    ],
-    sequenceMode: true,    
-    showReferenceStrip: true,
-    referenceStripScroll: 'vertical',
-    */
-});
+function createView(sources) {
+    var viewer = OpenSeadragon({
+        id: "container",
+        xmlns: "http://schemas.microsoft.com/deepzoom/2008",
+        prefixUrl: "openseadragon/images/"
+        /** 
+            tileSources: [
+                "img/webb/carina.jpg",
+                "img/webb/deep_field.png",
+                "img/webb/southern_nebula.jpg",
+                "img/webb/carina.jpg",
+                "img/webb/carina.jph",
+                "img/webb/carina.jph",
+            ],
+            sequenceMode: true,    
+            showReferenceStrip: true,
+            referenceStripScroll: 'vertical',
+            */
+    });
 
-var $viewer = $('#container');
+    var $viewer = $('#container');
 
 
-// This returns replaceImage defined inside the function scope
-var loader = loadComparisonImages( $viewer, viewer, sources );
+    // This returns replaceImage defined inside the function scope
+    var loader = loadComparisonImages($viewer, viewer, sources);
 
-// This is the part that gets all wonky.
-// Try moving the slider after it fires
-/**
-var timer = 4000;
-setTimeout( loadSecond, timer );
-
-function loadFirst() {
-    loader( sources[1] );
+    // This is the part that gets all wonky.
+    // Try moving the slider after it fires
+    /**
+    var timer = 4000;
     setTimeout( loadSecond, timer );
-}
-
-function loadSecond() {
-    loader( sources[2] );
-    setTimeout( loadFirst, timer );
-}
-*/
-
-// https://codepen.io/imoskvin/pen/yOXqvO?editors=0010
-function loadComparisonImages( $viewer, viewer, sources ) {
-
-    var $handle = $('<span/>').addClass('slider-handle');
-
-    $viewer.append( $handle );
-    $viewer.addClass('slider-container');
-
-    var middle = new OpenSeadragon.Point( $viewer.width() / 2, $viewer.height() / 2 );
-
-    function updateMiddle( offset ) {
-        middle.x = offset;
+    
+    function loadFirst() {
+        loader( sources[1] );
+        setTimeout( loadSecond, timer );
     }
+    
+    function loadSecond() {
+        loader( sources[2] );
+        setTimeout( loadFirst, timer );
+    }
+    */
 
-    // Keep track of the two images we're splitting
-    var leftImage = null;
-    var rightImage = null;
+    // https://codepen.io/imoskvin/pen/yOXqvO?editors=0010
+    function loadComparisonImages($viewer, viewer, sources) {
 
-    var leftRect = new OpenSeadragon.Rect( 0,0,0,0 );
-    var rightRect = new OpenSeadragon.Rect( 0,0,0,0 );
+        var $handle = $('<span/>').addClass('slider-handle');
 
-    viewer.open([
-        {
-            //Put the Webb image as a base layer, for hubble images that are transparent
-            tileSource: sources[1],
-            success: function( event ) {
+        $viewer.append($handle);
+        $viewer.addClass('slider-container');
 
-                imagesLoaded();
+        var middle = new OpenSeadragon.Point($viewer.width() / 2, $viewer.height() / 2);
 
-            }
-        },
-        {
-            tileSource: sources[0],
-            success: function( event ) {
+        function updateMiddle(offset) {
+            middle.x = offset;
+        }
 
-                leftImage = event.item;
-                imagesLoaded();
+        // Keep track of the two images we're splitting
+        var leftImage = null;
+        var rightImage = null;
 
-            }
-        },
-        {
-            tileSource: sources[1],
-            success: function( event ) {
+        var leftRect = new OpenSeadragon.Rect(0, 0, 0, 0);
+        var rightRect = new OpenSeadragon.Rect(0, 0, 0, 0);
 
-                rightImage = event.item;
-                imagesLoaded();
+        viewer.open([
+            {
+                //Put the Webb image as a base layer, for hubble images that are transparent
+                tileSource: sources[1],
+                success: function (event) {
 
-            }
-        },
-    ]);
+                    imagesLoaded();
 
-    // Handle pan and zoom events
-    viewer.addHandler('animation', function (viewer) {
-
-        imagesClip();
-
-    })
-
-    // Callback function to modify what image is loaded
-    var replaceImage = function( source ) {
-
-        viewer.addTiledImage({
-            tileSource: source,
-            success: function( event ) {
-              
-                if( rightImage ) {
-                    viewer.world.getIndexOfItem( rightImage );
-                    viewer.world.removeItem( rightImage );
                 }
-              
-                rightImage = event.item;
-                imagesClip();
-            }
-        });
-    };
+            },
+            {
+                tileSource: sources[0],
+                success: function (event) {
 
-    // Return the callback function
-    return replaceImage;
+                    leftImage = event.item;
+                    imagesLoaded();
 
-    // Basic function to check when both images are loaded
-    function imagesLoaded() {
-        if( leftImage && rightImage ) {
+                }
+            },
+            {
+                tileSource: sources[1],
+                success: function (event) {
 
-            leftRect.height = leftImage.getContentSize().y;
-            rightRect.height = rightImage.getContentSize().y;
+                    rightImage = event.item;
+                    imagesLoaded();
+
+                }
+            },
+        ]);
+
+        // Handle pan and zoom events
+        viewer.addHandler('animation', function (viewer) {
 
             imagesClip();
 
-            initClip();
+        })
 
-        }
-    }
+        // Callback function to modify what image is loaded
+        var replaceImage = function (source) {
 
-    function imagesClip(  ) {
+            viewer.addTiledImage({
+                tileSource: source,
+                success: function (event) {
 
-        var rox = rightImage.viewerElementToImageCoordinates( middle ).x;
-        var lox = leftImage.viewerElementToImageCoordinates( middle ).x;
+                    if (rightImage) {
+                        viewer.world.getIndexOfItem(rightImage);
+                        viewer.world.removeItem(rightImage);
+                    }
 
-        rightRect.x = rox ;
-        rightRect.width = rightImage.getContentSize().x - rox;
+                    rightImage = event.item;
+                    imagesClip();
+                }
+            });
+        };
 
-        leftRect.width = lox;
+        // Return the callback function
+        return replaceImage;
 
-        leftImage.setClip( leftRect );
-        rightImage.setClip( rightRect );
+        // Basic function to check when both images are loaded
+        function imagesLoaded() {
+            if (leftImage && rightImage) {
 
-    }
+                leftRect.height = leftImage.getContentSize().y;
+                rightRect.height = rightImage.getContentSize().y;
 
-    function initClip() {
+                imagesClip();
 
-        // TODO: Abstract this away
-        var $handle = $viewer.find('.slider-handle');
-        var $container = $handle.parents('.slider-container');
+                initClip();
 
-        // We will assume that the width of the handle element does not change
-        var dragWidth = $handle.outerWidth();
-
-        // However, we will track when the container resizes
-        var containerWidth, containerOffest, minLeft, maxLeft;
-
-        function updateContainerDimensions() {
-
-            containerWidth = $container.outerWidth();
-            containerOffset = $container.offset().left;
-            minLeft = containerOffset + 10;
-            maxLeft = containerOffset + containerWidth - dragWidth - 10;
-
+            }
         }
 
-        // Retrieve initial container dimention
-        updateContainerDimensions();
+        function imagesClip() {
 
-        // Bind the container resize
-        $(window).resize( function() {
-            updateContainerDimensions();
+            var rox = rightImage.viewerElementToImageCoordinates(middle).x;
+            var lox = leftImage.viewerElementToImageCoordinates(middle).x;
 
-            // Spoof the mouse events
-            var offset = $handle.offset().left + dragWidth / 2;
-            var event;
+            rightRect.x = rox;
+            rightRect.width = rightImage.getContentSize().x - rox;
 
-            // Bind the drag event
-            event = new jQuery.Event("mousedown");
-            event.pageX = offset;
+            leftRect.width = lox;
 
-            $handle.trigger( event );
+            leftImage.setClip(leftRect);
+            rightImage.setClip(rightRect);
 
-            // Execute the drag event
-            event = new jQuery.Event("mousemove");
-            event.pageX = offset;
+        }
 
-            $container.trigger( event );
+        function initClip() {
 
-            // Unbind the drag event
-            $handle.trigger("mouseup");
+            // TODO: Abstract this away
+            var $handle = $viewer.find('.slider-handle');
+            var $container = $handle.parents('.slider-container');
 
-        });
+            // We will assume that the width of the handle element does not change
+            var dragWidth = $handle.outerWidth();
 
-        // We are just going to assume jQuery is loaded by now
-        // Eventually, I'll make this work without jQuery
-        $handle.on("mousedown vmousedown ontouchstart", function(e) {
+            // However, we will track when the container resizes
+            var containerWidth, containerOffest, minLeft, maxLeft;
 
-            var xPosition = $handle.offset().left + dragWidth - e.pageX;
+            function updateContainerDimensions() {
 
-            updateContainerDimensions();
-
-            function trackDrag(e) {
-
-                var leftValue = e.pageX + xPosition - dragWidth;
-
-                //constrain the draggable element to move inside its container
-                leftValue = Math.max(leftValue, minLeft);
-                leftValue = Math.min(leftValue, maxLeft);
-
-                var widthPixel = (leftValue + dragWidth/2 - containerOffset);
-                var widthFraction = widthPixel/containerWidth;
-                var widthPercent = widthFraction*100+'%';
-
-                $handle.css('left', widthPercent);
-
-                updateMiddle( widthPixel );
-                imagesClip( );
+                containerWidth = $container.outerWidth();
+                containerOffset = $container.offset().left;
+                minLeft = containerOffset + 10;
+                maxLeft = containerOffset + containerWidth - dragWidth - 10;
 
             }
 
-            $('html').on("mousemove vmousemove ontouchmove", trackDrag);
+            // Retrieve initial container dimention
+            updateContainerDimensions();
 
-            $('html').one("mouseup vmouseup ontouchend", function(e) {
-                $('html').unbind("mousemove vmousemove ontouchmove", trackDrag);
+            // Bind the container resize
+            $(window).resize(function () {
+                updateContainerDimensions();
+
+                // Spoof the mouse events
+                var offset = $handle.offset().left + dragWidth / 2;
+                var event;
+
+                // Bind the drag event
+                event = new jQuery.Event("mousedown");
+                event.pageX = offset;
+
+                $handle.trigger(event);
+                // Bind the touchdrag event
+                event = new jQuery.Event("touchstart");
+                event.pageX = offset;
+
+                $handle.trigger(event);
+
+
+                // Execute the drag event
+                event = new jQuery.Event("mousemove");
+                event.pageX = offset;
+
+                $container.trigger(event);
+
+                // Unbind the drag event
+                $handle.trigger("mouseup");
+
+                // Execute the drag event
+                event = new jQuery.Event("touchmove");
+                event.pageX = offset;
+
+                $container.trigger(event);
+
+                // Unbind the drag event
+                $handle.trigger("touchend");
+
             });
 
-            e.preventDefault();
+            // We are just going to assume jQuery is loaded by now
+            // Eventually, I'll make this work without jQuery
+            $handle.on("mousedown vmousedown ontouchstart", function (e) {
 
-        });
+                var xPosition = $handle.offset().left + dragWidth - e.pageX;
 
+                updateContainerDimensions();
+
+                function trackDrag(e) {
+
+                    var leftValue = e.pageX + xPosition - dragWidth;
+
+                    //constrain the draggable element to move inside its container
+                    leftValue = Math.max(leftValue, minLeft);
+                    leftValue = Math.min(leftValue, maxLeft);
+
+                    var widthPixel = (leftValue + dragWidth / 2 - containerOffset);
+                    var widthFraction = widthPixel / containerWidth;
+                    var widthPercent = widthFraction * 100 + '%';
+
+                    $handle.css('left', widthPercent);
+
+                    updateMiddle(widthPixel);
+                    imagesClip();
+
+                }
+
+                $('html').on("mousemove vmousemove ontouchmove", trackDrag);
+
+                $('html').one("mouseup vmouseup ontouchend", function (e) {
+                    $('html').unbind("mousemove vmousemove ontouchmove", trackDrag);
+                });
+
+                e.preventDefault();
+
+            });
+
+        }
     }
-
-
-const carinaLink = document.getElementById('btn');
-carinaLink.addEventListener('click'),function handleClick(){
-    viewer.close();
-}
-const ringLink = document.getElementById('CarinaLink');
-
-}
 }
