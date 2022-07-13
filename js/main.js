@@ -35,7 +35,8 @@ jQuery(document).ready(function($){
     function checkPosition(container) {
         container.each(function(){
             var actualContainer = $(this);
-            if( $(window).scrollTop() + $(window).height()*0.5 > actualContainer.offset().top) {
+            var rect = actualContainer[0].getBoundingClientRect();
+            if( rect.top >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)) {
                 actualContainer.addClass('is-visible');
             }
         });
