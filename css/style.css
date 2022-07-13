@@ -15,7 +15,13 @@ body {
   color: #2E3440;
   background-color: #2E3440;
 }
-
+.logo{
+ display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100px;
+  margin-top: 1em;
+}
 a {
   color: #EBCB8B;
   text-decoration: none;
@@ -55,10 +61,6 @@ header h1 {
   font-weight: 300;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-.main {
-paddin
-
 }
 @media only screen and (min-width: 768px) {
   header {
