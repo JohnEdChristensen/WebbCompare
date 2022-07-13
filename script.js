@@ -4,7 +4,7 @@ function createView(sources){
 var viewer = OpenSeadragon({
     id:              "container",
     xmlns:           "http://schemas.microsoft.com/deepzoom/2008",
-    prefixUrl:       "/openseadragon/images/"
+    prefixUrl:       "openseadragon/images/"
 /** 
     tileSources: [
         "img/webb/carina.jpg",
@@ -66,7 +66,8 @@ function loadComparisonImages( $viewer, viewer, sources ) {
 
     viewer.open([
         {
-            tileSource: sources[0],
+            //Put the Webb image as a base layer, for hubble images that are transparent
+            tileSource: sources[1],
             success: function( event ) {
 
                 imagesLoaded();
@@ -238,12 +239,12 @@ function loadComparisonImages( $viewer, viewer, sources ) {
 
     }
 
-}
 
 const carinaLink = document.getElementById('btn');
 carinaLink.addEventListener('click'),function handleClick(){
-    loader(sources[2])
+    viewer.close();
 }
 const ringLink = document.getElementById('CarinaLink');
 
+}
 }
