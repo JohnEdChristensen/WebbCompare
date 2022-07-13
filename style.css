@@ -63,6 +63,14 @@ margin: 5px;
 	background-color: #445b7c;
 }
 
+.loading {
+  color:#ccc;
+  font-size: 30px;
+  z-index: 10;
+  display: block;
+  text-align: center;
+}
+
 
 div.gallery {
   margin: 5px;

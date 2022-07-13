@@ -26,22 +26,40 @@ function createView(sources) {
     // This returns replaceImage defined inside the function scope
     var loader = loadComparisonImages($viewer, viewer, sources);
 
-    // This is the part that gets all wonky.
-    // Try moving the slider after it fires
-    /**
-    var timer = 4000;
-    setTimeout( loadSecond, timer );
-    
-    function loadFirst() {
-        loader( sources[1] );
-        setTimeout( loadSecond, timer );
+    // Loading Indicator
+    function areAllFullyLoaded() {
+        var tiledImage;
+        var count = viewer.world.getItemCount();
+        for (var i = 0; i < count; i++) {
+            tiledImage = viewer.world.getItemAt(i);
+            if (!tiledImage.getFullyLoaded()) {
+                return false;
+            }
+        }
+        return true;
     }
-    
-    function loadSecond() {
-        loader( sources[2] );
-        setTimeout( loadFirst, timer );
+
+    var isFullyLoaded = false;
+
+    function updateLoadingIndicator() {
+        // Note that this function gets called every time isFullyLoaded changes, which it will do as you 
+        // zoom and pan around. All we care about is the initial load, though, so we are just hiding the 
+        // loading indicator and not showing it again. 
+        if (isFullyLoaded) {
+            document.querySelector('.loading').style.display = 'none';
+        }
     }
-    */
+
+    viewer.world.addHandler('add-item', function (event) {
+        var tiledImage = event.item;
+        tiledImage.addHandler('fully-loaded-change', function () {
+            var newFullyLoaded = areAllFullyLoaded();
+            if (newFullyLoaded !== isFullyLoaded) {
+                isFullyLoaded = newFullyLoaded;
+                updateLoadingIndicator();
+            }
+        });
+    });
 
     // https://codepen.io/imoskvin/pen/yOXqvO?editors=0010
     function loadComparisonImages($viewer, viewer, sources) {
