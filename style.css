@@ -70,6 +70,10 @@ margin: 5px;
   display: block;
   text-align: center;
 }
+.tip{
+  color:#ccc;
+  text-align: center;
+}
 
 
 div.gallery {
