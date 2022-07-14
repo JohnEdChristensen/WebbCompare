@@ -106,16 +106,20 @@ div.desc {
     position: fixed;
     bottom: 1px;
     right: 1px;
-    width: 50px;
-    height: 50px;
     z-index: 1;
-	color:white;
-	border: none;
-	background-color: transparent;
-	margin:1em;
+    color:#ccc;
+    border: none;
+    background-color: transparent;
+    vertical-align: top;
+    display: inline-block;
+    text-align: center;
+    margin:1em;
 }/* Darker background on mouse-over */
 .floating_button:hover {
-  background-color: #444;
+  color:#fff;
+}
+.floating_button_caption {
+  display: block;
 }
 
 .m-image-slider__viewer {
