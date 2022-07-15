@@ -12,8 +12,9 @@ Primary style
 body {
   font-size: 100%;
   font-family: "Open Sans", sans-serif;
-  color: #2E3440;
+  color: #eceff4;
   background-color: #2E3440;
+  padding-left: 5px;
 }
 .logo{
  display: block;
@@ -23,7 +24,7 @@ body {
   margin-top: 1em;
 }
 a {
-  color: #EBCB8B;
+  color: #eceff4;
   text-decoration: none;
 }
 
@@ -34,18 +35,33 @@ img {
 h1 {
   font-size: 22px;
   font-size: 1.375rem;
-  color: #EBCB8B;
+  color: #eceff4;
   font-weight: 300;
   text-align: center;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-h1 a{
-  text-decoration: underline;
+
+.card {
+width: fit-content;
+height: fit-content;
+margin-top: 1em;
+margin: 10px auto 0;
+padding: 1em;
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+border-radius: 5px;
+position: relative;
 }
+.card .zoom{
+  position:absolute;
+  top:0;
+  right:0;
+  margin: 5px;
+}
+
 /* -------------------------------- 
 
-Main components 
+Slider Style
 
 -------------------------------- */
 header {
@@ -75,7 +91,6 @@ header h1 {
 
 .cd-image-container {
   position: relative;
-  width: 90%;
   max-width: 768px;
   margin: 1em auto;
 }
@@ -87,7 +102,7 @@ header h1 {
   position: absolute;
   bottom: 0;
   right: 0;
-  color: #ffffff;
+  color: #eceff4;
   padding: 1em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -205,7 +220,8 @@ header h1 {
 }
 .cd-handle.draggable {
   /* change background color when element is active */
-  background-color: #D08770;
+  background-color: #b79e6c;
+  opacity:.2; 
 }
 .is-visible .cd-handle {
   opacity: 1;

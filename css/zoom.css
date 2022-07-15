@@ -6,27 +6,35 @@ html, body {
   font-family: "Open Sans", sans-serif;
   color:#ccc
 }
-.logo{
- display: block;
-  margin-left: auto;
-  margin-right: auto;
-  height: 100px;
-  margin-top: 1em;
-}
-h1 {
+
+.loading {
+  color:#ccc;
+  font-size: 30px;
+  z-index: 10;
+  display: block;
   text-align: center;
+  position: absolute;
+  top:0;
+  left:55%;
 }
-h1 a{
-  text-decoration: underline;
-  font-size: 22px;
-  font-size: 1.375rem;
-  color: #EBCB8B;
-  font-weight: 300;
-  margin: 5px;
+
+.floating_button {
+    position: fixed;
+    top: 1px;
+    right: 1px;
+    width: 50px;
+    height: 50px;
+    z-index: 1;
+	color: #ccc;
+	border: none;
+	background-color: transparent;
+	margin:1em;
+}/* Darker background on mouse-over */
+.floating_button:hover {
+  color: #fff
 }
-.scope_banner{
-margin: 5px;
-}
+
+/* OpenSeadragon */
 * {
   outline: 0;
 }
@@ -63,64 +71,6 @@ margin: 5px;
 	background-color: #445b7c;
 }
 
-.loading {
-  color:#ccc;
-  font-size: 30px;
-  z-index: 10;
-  display: block;
-  text-align: center;
-}
-.tip{
-  color:#ccc;
-  text-align: center;
-}
-
-
-div.gallery {
-  margin: 5px;
-  margin-top: 30px;
-  border: 2px solid rgb(142, 142, 142);
-  float: left;
-  width: 180px;
-  border-radius: 5px;
-  background-color:#111;
-}
-
-div.gallery:hover {
-  border: 2px solid #fff;
-}
-
-div.gallery img {
-  width: 100%;
-  height: auto;
-  border-radius: 5px;
-}
-
-div.desc {
-  padding: 15px;
-  text-align: center;
-  color: #ffffff;
-}
-
-.floating_button {
-    position: fixed;
-    bottom: 1px;
-    right: 1px;
-    z-index: 1;
-    color:#ccc;
-    border: none;
-    background-color: transparent;
-    vertical-align: top;
-    display: inline-block;
-    text-align: center;
-    margin:1em;
-}/* Darker background on mouse-over */
-.floating_button:hover {
-  color:#fff;
-}
-.floating_button_caption {
-  display: block;
-}
 
 .m-image-slider__viewer {
   height: 100%;
@@ -164,7 +114,7 @@ div.desc {
 
   border-radius: 50%;
 
-  background: gray !important;
+  background: #EBCB8B !important;
   cursor: move;
 
   box-shadow: 0 0 0 6px rgba(0, 0, 0, 0.2), 0 0 10px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.3);
