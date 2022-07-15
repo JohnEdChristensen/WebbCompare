@@ -11,6 +11,7 @@
 //https://codepen.io/imoskvin/pen/yOXqvO
 // https://codyhouse.co/gem/css-jquery-image-comparison-slider/
 
+
 function createView(sources) {
 
     const viewerElement = document.getElementById('container');
