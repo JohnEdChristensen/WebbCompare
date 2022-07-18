@@ -36,7 +36,7 @@ jQuery(document).ready(function($){
         container.each(function(){
             var actualContainer = $(this);
             var rect = actualContainer[0].getBoundingClientRect();
-            if( rect.top >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)) {
+            if( rect.top <= (window.innerHeight || document.documentElement.clientHeight)) {
                 actualContainer.addClass('is-visible');
             }
         });

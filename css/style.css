@@ -58,6 +58,23 @@ position: relative;
   right:0;
   margin: 5px;
 }
+/* scroll bar */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background-color: #2e3440;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+  background-color: #3B4252;
+}
 
 /* -------------------------------- 
 

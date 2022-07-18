@@ -1,0 +1,236 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat");
+body {
+  background-color: #2E3440;
+  font-family: "Montserrat", sans-serif;
+}
+
+.container {
+  height: 70px;
+  padding: 55px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  text-align: center;
+}
+
+.menu {
+  z-index: 999;
+  position: fixed;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+.menu .share i.fa {
+  height: 50px;
+  width: 50px;
+  text-align: center;
+  line-height: 50px;
+  background-color: #3B4252;
+  border-radius: 2px;
+  color: #D8DEE9;
+}
+.menu .share:hover.bottom .submenu li:nth-child(1) {
+  opacity: 1;
+  top: 50px;
+  transform: rotate(0deg);
+  border-top: 1px dashed #101217;
+  transition-delay: 0.08s;
+}
+.menu .share:hover.bottom .submenu li:nth-child(2) {
+  opacity: 1;
+  top: 100px;
+  transform: rotate(0deg);
+  border-top: 1px dashed #101217;
+  transition-delay: 0.16s;
+}
+.menu .share:hover.bottom .submenu li:nth-child(3) {
+  opacity: 1;
+  top: 150px;
+  transform: rotate(0deg);
+  border-top: 1px dashed #101217;
+  transition-delay: 0.24s;
+}
+.menu .share:hover.bottom .submenu li:nth-child(4) {
+  opacity: 1;
+  top: 200px;
+  transform: rotate(0deg);
+  border-top: 1px dashed #101217;
+  transition-delay: 0.32s;
+}
+.menu .share:hover.bottom .submenu li:nth-child(5) {
+  opacity: 1;
+  top: 250px;
+  transform: rotate(0deg);
+  border-top: 1px dashed #101217;
+  transition-delay: 0.4s;
+}
+.menu .share:hover.left .submenu li:nth-child(1) {
+  opacity: 1;
+  left: -51px;
+  transform: rotate(0deg);
+  transition-delay: 0.5s;
+  border-right: 1px dashed #101217;
+}
+.menu .share:hover.left .submenu li:nth-child(2) {
+  opacity: 1;
+  left: -102px;
+  transform: rotate(0deg);
+  transition-delay: 1s;
+  border-right: 1px dashed #101217;
+}
+.menu .share:hover.left .submenu li:nth-child(3) {
+  opacity: 1;
+  left: -153px;
+  transform: rotate(0deg);
+  transition-delay: 1.5s;
+  border-right: 1px dashed #101217;
+}
+.menu .share:hover.left .submenu li:nth-child(4) {
+  opacity: 1;
+  left: -204px;
+  transform: rotate(0deg);
+  transition-delay: 2s;
+  border-right: 1px dashed #101217;
+}
+.menu .share:hover.left .submenu li:nth-child(5) {
+  opacity: 1;
+  left: -255px;
+  transform: rotate(0deg);
+  transition-delay: 2.5s;
+  border-right: 1px dashed #101217;
+}
+.menu .share:hover.right .submenu li:nth-child(1) {
+  opacity: 1;
+  left: 50px;
+  transform: rotate(0deg);
+  transition-delay: 0.08s;
+  border-left: 1px dashed #101217;
+}
+.menu .share:hover.right .submenu li:nth-child(2) {
+  opacity: 1;
+  left: 100px;
+  transform: rotate(0deg);
+  transition-delay: 0.16s;
+  border-left: 1px dashed #101217;
+}
+.menu .share:hover.right .submenu li:nth-child(3) {
+  opacity: 1;
+  left: 150px;
+  transform: rotate(0deg);
+  transition-delay: 0.24s;
+  border-left: 1px dashed #101217;
+}
+.menu .share:hover.right .submenu li:nth-child(4) {
+  opacity: 1;
+  left: 200px;
+  transform: rotate(0deg);
+  transition-delay: 0.32s;
+  border-left: 1px dashed #101217;
+}
+.menu .share:hover.right .submenu li:nth-child(5) {
+  opacity: 1;
+  left: 250px;
+  transform: rotate(0deg);
+  transition-delay: 0.4s;
+  border-left: 1px dashed #101217;
+}
+.menu .share:hover.top .submenu li:nth-child(1) {
+  opacity: 1;
+  top: -51px;
+  transition-delay: 0.08s;
+  transform: rotateY(0deg);
+  border-bottom: 1px dashed #1b1e26;
+}
+.menu .share:hover.top .submenu li:nth-child(2) {
+  opacity: 1;
+  top: -102px;
+  transition-delay: 0.16s;
+  transform: rotateY(0deg);
+  border-bottom: 1px dashed #1b1e26;
+}
+.menu .share:hover.top .submenu li:nth-child(3) {
+  opacity: 1;
+  top: -153px;
+  transition-delay: 0.24s;
+  transform: rotateY(0deg);
+  border-bottom: 1px dashed #1b1e26;
+}
+.menu .share:hover.top .submenu li:nth-child(4) {
+  opacity: 1;
+  top: -204px;
+  transition-delay: 0.32s;
+  transform: rotateY(0deg);
+  border-bottom: 1px dashed #1b1e26;
+}
+.menu .share:hover.top .submenu li:nth-child(5) {
+  opacity: 1;
+  top: -255px;
+  transition-delay: 0.4s;
+  transform: rotateY(0deg);
+  border-bottom: 1px dashed #1b1e26;
+}
+.menu .submenu {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+.menu .submenu li {
+  transition: all ease-in-out 0.5s;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  opacity: 0;
+}
+.menu .submenu li a {
+  color: #D8DEE9;
+}
+.menu .submenu li a:hover i.fa {
+  color: #ECEFF4;
+}
+.menu .submenu li a:hover.facebook i.fa {
+  background-color: #3b5999;
+}
+.menu .submenu li a:hover.twitter i.fa {
+  background-color: #55acee;
+}
+.menu .submenu li a:hover.reddit i.fa {
+  background-color: #dd4b39;
+}
+.menu .submenu li a:hover.instagram i.fa {
+  background-color: #e4405f;
+}
+.menu .submenu li a:hover.email i.fa {
+  background-color: #A3BE8C;
+}
+.menu .submenu li:nth-child(1) {
+  transform: rotateX(45deg);
+}
+.menu .submenu li:nth-child(2) {
+  transform: rotateX(90deg);
+}
+.menu .submenu li:nth-child(3) {
+  transform: rotateX(135deg);
+}
+.menu .submenu li:nth-child(4) {
+  transform: rotateX(180deg);
+}
+.menu.topLeft {
+  top: 10px;
+  left: 10px;
+}
+.menu.topRight {
+  top: 10px;
+  right: 10px;
+}
+.menu.bottomLeft {
+  bottom: 10px;
+  left: 10px;
+}
+.menu.bottomRight {
+  bottom: 10px;
+  right: 10px;
+}

@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
     <link rel="stylesheet" href="css/style.css"> <!-- Resource style -->
+    <link rel="stylesheet" href="css/share.css"> <!-- Resource style -->
     <script src="js/modernizr.js"></script> <!-- Modernizr -->
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -30,20 +31,29 @@
 <body>
     <div class="main" style="margin-bottom: 200px;">
 
-        <!-- AddToAny BEGIN -->
-        <div class="a2a_kit a2a_kit_size_32 a2a_default_style" style="position:absolute; top:0;right:0; padding:1em;">
-            <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
-        </div>
-        <script async src="https://static.addtoany.com/menu/page.js"></script>
-        <!-- AddToAny END -->
+  <ul class="menu topRight">
+  <li class="share bottom">
+    <i class="fa fa-share-alt"></i>
+    <ul class="submenu">
+      <li><a href="https://www.facebook.com/sharer/sharer.php?u=webbcompare.com" class="facebook"><i class="fa fa-facebook"></i></a></li>
+      <li><a href="https://twitter.com/intent/tweet?text=webbcompare.com" class="twitter"><i class="fa fa-twitter"></i></a></li>
+      <li><a href="https://reddit.com/submit?url=www.webbcompare.com" class="reddit"><i class="fa fa-reddit"></i></a></li>
+      <li><a href="mailto:?subject=Check%20this%20out!&body=www.webbcompare.com" class="email"><i class="fa fa-envelope"></i></a></li>
+    </ul>
+
+  </li>
+</ul>
 
         <img class="logo" src="img/WebbCompareLogo.png">
 
+
+        <div style="position: fixed;bottom: 0;left: 0;padding:1em;z-index: 10;">
+            <a href="https://github.com/JohnEdChristensen/WebbCompare/tree/gh-pages">
+                <i class="fa fa-github fa-2x"></i></a>
+        </div>
         <hr />
 
-
         <!---------------- Southern Ring Nebula ---------------------->
-
         <div class="card">
             <a href="zoom.html?target=southern_nebula"><i class="fa fa-search-plus fa-2x zoom"></i></a>
             <h1> <a href="https://en.wikipedia.org/wiki/NGC_3132">Southern Ring Nebula</a></h1>
@@ -86,9 +96,9 @@
                                (max-width: 900px) 700px,
                                (max-width: 1700px) 1400px,
                                2800px" src="img/webb/carina.jpg">
-                <!--    <img src="img/Stephan's_Quintet_Hubble_Rotated.jpg" alt="Hubble Image">-->
                 <span class="cd-image-label" data-type="original">Webb</span>
 
+                <!-- the resizable image on top -->
                 <div class="cd-resize-img">
                     <img alt="Hubble's Carina" srcset="img/hubble/carina_2800.png 2800w,
                                     img/hubble/carina_1400.png 1400w,
@@ -106,7 +116,7 @@
 
         <!---------------- Deep Field ---------------------->
         <div class="card">
-            <a href="zoom.html?target=deep_field"><i class="fa fa-search-plus fa-2x zoom" ></i></a>
+            <a href="zoom.html?target=deep_field"><i class="fa fa-search-plus fa-2x zoom"></i></a>
             <h1> <a href="https://en.wikipedia.org/wiki/SMACS_J0723.3-7327">Galaxy Cluster SMACS 0723</a></h1>
             <figure class="cd-image-container">
                 <img alt="Webb's first Deep Field" srcset="img/webb/deep_field_2800.jpg 2800w,
@@ -136,7 +146,7 @@
 
         <!---------------- Stephan's Quintet ---------------------->
         <div class="card">
-            <a href="zoom.html?target=stephans_quintet"><i class="fa fa-search-plus fa-2x zoom" ></i></a>
+            <a href="zoom.html?target=stephans_quintet"><i class="fa fa-search-plus fa-2x zoom"></i></a>
             <h1> <a href="https://en.wikipedia.org/wiki/Stephan%27s_Quintet">Stephan's Quintet</a></h1>
             <figure class="cd-image-container">
                 <img alt="Webb's Stephan's Quintet" srcset="img/webb/stephans_quintet_2800.jpg 2800w,
@@ -165,16 +175,10 @@
         </div>
 
 
-        <div style="position: fixed;bottom: 0;right: 0;padding:1em;">
-            <a href="https://github.com/JohnEdChristensen/WebbCompare/tree/gh-pages">
-                <i class="fa fa-github"></i></a>
-
-        </div>
-        <script src="js/jquery-2.1.1.js"></script>
-        <script src="js/jquery.mobile.custom.min.js"></script> <!-- Resource jQuery -->
-        <script src="js/main.js"></script> <!-- Resource jQuery -->
-
     </div>
+    <script src="js/jquery-2.1.1.js"></script>
+    <script src="js/jquery.mobile.custom.min.js"></script> <!-- Resource jQuery -->
+    <script src="js/main.js"></script> <!-- Resource jQuery -->
 
 </body>
 
