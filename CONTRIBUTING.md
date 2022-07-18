@@ -30,3 +30,6 @@ I have no strong preference on a specific style standard to, but I'm open to sug
 The site is published using Github Pages from the `gh-pages` branch. For now submit PR to this branch. 
 If you have advice on how to best handle branching (should we have a dev branch?) let me know.
 I'm not familiar with maintaining an open source project *yet*.
+
+### Launching Locally
+There shouldn't be any external depencies. I use  [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) with VSCode to run the website locally, but you should be able to use whatever you want!
