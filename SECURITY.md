@@ -8,7 +8,7 @@ For official resources see https://github.com/JohnEdChristensen/WebbCompare
 
 | Version       | Supported                                         |
 | ------------- | ------------------------------------------------- |
-| gh-pages HEAD | best effort by github user jculpon at punch elvis |
+| gh-pages HEAD | best effort by JohnEdChristensen                  |
 
 ## Reporting a Vulnerability
 
@@ -19,7 +19,6 @@ Use the GitHub.com(R)(TM) "Issues" tag to open a bug. Start the title with
 exploit. Once the issue is created, contact jculpon via github and email a link to 
 the issue in the following style:
 SUBJECT/TOPIC LINE: [SECURITY] WebbCompare issue _#your number here_
-TO: admin@punchelvis.org
-CC: info@punchelvis.org
+TO: [JohnEdChristensen@github.com]
 
 For more information see the [OWASP Cheat Sheet on Disclosure](https://cheatsheetseries.owasp.org/cheatsheets/Vulnerability_Disclosure_Cheat_Sheet.html)
