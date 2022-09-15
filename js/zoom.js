@@ -37,6 +37,7 @@ function createView(sources) {
             xmlns: 'http://schemas.microsoft.com/deepzoom/2008',
             prefixUrl: "openseadragon/images/",
             zoomPerClick: 1.3, // 1, // 2.0
+            maxZoomPixelRatio: 2,
             showZoomControl: true,
             showFullPageControl: true,
             showRotationControl: false,
