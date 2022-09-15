@@ -39,6 +39,7 @@ function createView(sources) {
             zoomPerClick: 1.3, // 1, // 2.0
             maxZoomPixelRatio: 2,
             showZoomControl: true,
+            maxZoomPixelRatio: 3,
             showFullPageControl: true,
             showRotationControl: false,
             showSequenceControl: false,
