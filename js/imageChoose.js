@@ -9,6 +9,16 @@ $.urlParam = function (name) {
 
 const target = $.urlParam("target")
 switch (target) {
+    case 'tarantula':
+        webbImgName = "tarantula.png";
+        hubbleImgName = "tarantula.png";
+        document.title="Tarantula Nebula"
+        break;
+    case 'cartwheel':
+        webbImgName = "cartwheel.png";
+        hubbleImgName = "cartwheel.png";
+        document.title="Cartwheel Galaxy"
+        break;
     case 'carina':
         webbImgName = "carina.jpg";
         hubbleImgName = "carina.png";
